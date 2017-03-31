@@ -1,47 +1,37 @@
 package com.bee.study.controller;
 
-import com.bee.study.appEvent.MyApplicationEnvironmentPreparedEventListener;
-import com.bee.study.appEvent.MyApplicationFailedEventListener;
-import com.bee.study.appEvent.MyApplicationPreparedEventListener;
-import com.bee.study.appEvent.MyApplicationStartedEventListener;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by liangbe on 2017/3/31.
  */
 
-@Controller
-@EnableAutoConfiguration
+//@Controller
+//@EnableAutoConfiguration
+
+@RestController
+@RequestMapping("/springboot")
 public class SampleController {
 
 
-    @RequestMapping("/")
-    @ResponseBody
-    String home(HttpServletRequest request) {
-        String userName = request.getParameter("username");
-//        if (userName == null) userName = "";
-        if (userName.equals("root")){
-            System.out.println("2233 ");
-        }
-        return "Hello World!";
+//    @RequestMapping("/")
+////    @ResponseBody
+//    public  String home() {
+//
+//        return "Hello Liangbe!";
+//    }
+
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    public String sayWorld(@PathVariable("name") String name) {
+        return "Hello " + name;
     }
 
-
-    public static void main(String[] args) throws Exception {
+//    已经在Util中的Application 实现了
+//    public static void main(String[] args) throws Exception {
+//
+//
 //        SpringApplication.run(SampleController.class, args);
-
-        SpringApplication app = new SpringApplication(SampleController.class);
-        app.addListeners(new MyApplicationStartedEventListener());
-//        app.addListeners(new MyApplicationEnvironmentPreparedEventListener());
-//        app.addListeners(new MyApplicationPreparedEventListener());
-        app.addListeners(new MyApplicationFailedEventListener());
-        app.run(args);
-
-    }
+//
+//    }
 }
