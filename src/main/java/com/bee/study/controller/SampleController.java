@@ -1,5 +1,7 @@
 package com.bee.study.controller;
 
+import com.bee.study.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,10 +23,15 @@ public class SampleController {
 //
 //        return "Hello Liangbe!";
 //    }
+    @Autowired
+    User user;
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String sayWorld(@PathVariable("name") String name) {
-        return "Hello " + name;
+        System.out.println("userName:" + user.getName());
+        System.out.println("age:" + user.getAge());
+        System.out.println("address:" + user.getAddress());
+        return user.getRemark();
     }
 
 //    已经在Util中的Application 实现了

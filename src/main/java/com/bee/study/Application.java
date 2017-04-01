@@ -29,6 +29,6 @@ public class Application {
         app.addListeners(new MyApplicationFailedEventListener());
 //       ======== 加app 启动的监听器时 ============
         app.run(args);
-
     }
+
 }
