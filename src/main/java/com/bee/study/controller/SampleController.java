@@ -31,7 +31,7 @@ public class SampleController {
         System.out.println("userName:" + user.getName());
         System.out.println("age:" + user.getAge());
         System.out.println("address:" + user.getAddress());
-        return user.getRemark();
+        return user.getRemark()+ " and "+name;
     }
 
 //    已经在Util中的Application 实现了
