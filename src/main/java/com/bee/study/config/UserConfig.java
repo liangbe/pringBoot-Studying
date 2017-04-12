@@ -1,10 +1,9 @@
-package com.bee.study.entity;
+package com.bee.study.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  */
 @Component
 @ConfigurationProperties(prefix = "user")
-public class User {
+public class UserConfig {
 
 
     @Value("${userName:lkl}")

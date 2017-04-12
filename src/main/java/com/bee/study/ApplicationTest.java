@@ -1,7 +1,5 @@
 package com.bee.study;
 
-import com.bee.study.appEvent.MyApplicationFailedEventListener;
-import com.bee.study.appEvent.MyApplicationPreparedEventListener;
 import com.bee.study.appEvent.MyApplicationStartedEventListener;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Created by liangbe on 2017/3/31.
  */
+//这个Test 类我花了一天半
 
 //它只会扫同级包下的文件，不要问为什么。因为我花半个小时在这
 @SpringBootApplication
@@ -22,18 +21,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                    这里为 com.bee.study，在spring boot中bean都放置在该路径已经子路径下。
  */
 
-public class Application {
-    public static void main(String[] args) {
-        //       ======== 加app 启动的监听器时 ============
-        SpringApplication app = new SpringApplication(Application.class);
-        app.addListeners(new MyApplicationStartedEventListener());
-//        app.addListeners(new MyApplicationEnvironmentPreparedEventListener());
-//        app.addListeners(new MyApplicationPreparedEventListener());
-        app.setBannerMode(Banner.Mode.OFF);
-//        app.addListeners(new MyApplicationFailedEventListener());
-//       ======== 加app 启动的监听器时 ============
-
-        app.run(args);
-    }
+public class ApplicationTest {
 
 }

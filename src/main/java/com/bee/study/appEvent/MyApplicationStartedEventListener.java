@@ -15,8 +15,8 @@ public class MyApplicationStartedEventListener implements ApplicationListener<Ap
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
-        SpringApplication app = event.getSpringApplication();
-        app.setShowBanner(false);// 不显示banner信息
+//        SpringApplication app = event.getSpringApplication();
+//        app.setShowBanner(false);// 不显示banner信息
         logger.info("==MyApplicationStartedEventListener==");
     }
 }

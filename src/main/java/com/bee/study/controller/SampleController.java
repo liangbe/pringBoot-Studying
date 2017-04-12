@@ -1,6 +1,6 @@
 package com.bee.study.controller;
 
-import com.bee.study.entity.User;
+import com.bee.study.config.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class SampleController {
 
 
-//    @RequestMapping("/")
-////    @ResponseBody
-//    public  String home() {
-//
-//        return "Hello Liangbe!";
-//    }
     @Autowired
-    User user;
+    UserConfig user;
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String sayWorld(@PathVariable("name") String name) {
@@ -33,12 +27,4 @@ public class SampleController {
         System.out.println("address:" + user.getAddress());
         return user.getRemark()+ " and "+name;
     }
-
-//    已经在Util中的Application 实现了
-//    public static void main(String[] args) throws Exception {
-//
-//
-//        SpringApplication.run(SampleController.class, args);
-//
-//    }
 }
