@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 @Configuration
 public class TomcatConfig {
@@ -25,8 +26,8 @@ public class TomcatConfig {
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-//        tomcat.setUriEncoding("GBK"); ↑
-//        tomcat.setUriEncoding("UTF-8");
+//        tomcat.setUriEncoding(Charset.forName("GBK")); ↑
+        tomcat.setUriEncoding(Charset.forName("UTF-8"));
         tomcat.addAdditionalTomcatConnectors(createSslConnector());
         return tomcat;
     }
