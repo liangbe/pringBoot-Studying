@@ -1,22 +1,24 @@
 package com.bee.study.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
- * Created by liangbe on 2017/4/13.
+ * Created by liangbe on 2017/4/14.
  */
 @Entity
-@Table(name="education")
-public class Education {
+@Table(name="hobby")
+public class Hobby {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="name")
+    @Column(name="name",nullable = true)
     private String name;
 
-    @Column(name="degree")
-    private String  degree;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy="hobbyList")
+    private List<User> users;
 
     public Long getId() {
         return id;
@@ -34,11 +36,11 @@ public class Education {
         this.name = name;
     }
 
-    public String getDegree() {
-        return degree;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setUsers(List<User> Users) {
+        this.users = users;
     }
 }

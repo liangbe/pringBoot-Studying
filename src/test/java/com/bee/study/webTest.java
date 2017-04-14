@@ -1,9 +1,14 @@
 package com.bee.study;
 
 import com.bee.study.dao.AddressDao;
+import com.bee.study.dao.EducationDao;
+import com.bee.study.dao.HobbyDao;
 import com.bee.study.dao.UserDao;
 import com.bee.study.entity.Address;
+import com.bee.study.entity.Education;
+import com.bee.study.entity.Hobby;
 import com.bee.study.entity.User;
+import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,14 +44,21 @@ public class webTest {
     @Autowired
     private AddressDao addressDao;
 
+    @Autowired
+    private EducationDao educationDao;
+
+    @Autowired
+    private HobbyDao hobbyDao;
+
+
     @Test
     public void exampleTest() {
 //        String body = "Hello World";
 //        assertThat(body).isEqualTo("Hello World");
 
-//        User userData = repository.findOne(2L);
+//        User userData = repository.findOne(1L);
 //        Address address=new Address();
-         Address address=addressDao.findOne(2L);
+//         Address address=addressDao.findOne(2L);
 
 //        userData.setName("dingtian");
 //        userData.setAge(20);
@@ -52,11 +67,46 @@ public class webTest {
 //        address.setCountry("China");
 //        address.setProvince("GD");
 //        userData.setAddress(address);
-//        User userNew=repository.save(userData);
-//        assertThat(userNew.getName()).isEqualTo("dingtian");
-//        assertThat(userNew.getAge()).isEqualTo(23);
-//        assertThat(userNew.getFirstName()).isEqualTo("Yan");
+//        List<Education> educationList=userData.getEducationList();
+//        Education bachelor=educationList.get(0);
+//        educationList.add(bachelor);
+//        bachelor.setName("college graduate");
+//        bachelor.setDegree("bachelor");
+//        userData.setEducationList(educationList);
 
-        addressDao.delete(address);
+//        User userNew=repository.save(userData);
+//        assertThat(userNew.getName()).isEqualTo("liangbe");
+//        assertThat(userNew.getAge()).isEqualTo(25);
+//        assertThat(userNew.getAddress().getProvince()).isEqualTo("GD");
+
+//        addressDao.delete(address);
     }
+
+    @Test
+    //加下面这个会解决：could not initialize proxy - no Session
+    @Transactional
+    public void manyToManyTest() {
+//        User userData = repository.findOne(3L);
+//        List<Hobby> hobbies=new ArrayList<Hobby>();
+//        Hobby hobby1=new Hobby();
+//        Hobby hobby2=hobbyDao.findOne(2L);
+//        Hobby hobby3=hobbyDao.findOne(3L);
+//        hobby1.setName("fencing");
+//        hobbies.add(hobby1);
+//        hobbies.add(hobby2);
+//        hobbies.add(hobby3);
+//        userData.setHobbyList(hobbies);
+//        User userUpdate=repository.save(userData);
+//        assertThat(userData.getName()).isEqualTo("dingtian");
+        List<Hobby> hobbies=hobbyDao.findAll();
+        for(Hobby hobby:hobbies) {
+            List<User> users =hobby.getUsers();
+            System.out.println(hobby.getName() + " :");
+            for (User user : users) {
+                System.out.println(" " + user.getName());
+            }
+        }
+
+    }
+
 }

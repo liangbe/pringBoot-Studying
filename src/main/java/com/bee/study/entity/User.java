@@ -25,15 +25,24 @@ public class User {
     @Column(length = 30,name="first_name")
     private  String firstName;
 
-    @ManyToOne(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,
-            CascadeType.REFRESH})
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,
+            CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @OneToMany(fetch=FetchType.EAGER,cascade={CascadeType.PERSIST,CascadeType.MERGE,
-            CascadeType.REFRESH})
-    @JoinColumn(name = "id")
+    @OneToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,
+            CascadeType.REFRESH,CascadeType.DETACH})
+    @JoinColumn(name = "user_id")
     private List<Education> educationList;
+
+
+    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,
+            CascadeType.REFRESH,CascadeType.DETACH})
+    @JoinTable(name = "USER_HOBBY",
+                     joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName =
+                             "id") },
+                     inverseJoinColumns = { @JoinColumn(name = "HOBBY_ID") })
+    public List<Hobby> hobbyList;
 
     public Long getId() {
         return id;
@@ -81,5 +90,13 @@ public class User {
 
     public void setEducationList(List<Education> educationList) {
         this.educationList = educationList;
+    }
+
+    public List<Hobby> getHobbyList() {
+        return hobbyList;
+    }
+
+    public void setHobbyList(List<Hobby> hobbyList) {
+        this.hobbyList = hobbyList;
     }
 }
