@@ -8,6 +8,7 @@ import com.bee.study.entity.Address;
 import com.bee.study.entity.Education;
 import com.bee.study.entity.Hobby;
 import com.bee.study.entity.User;
+import com.bee.study.service.UserService;
 import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +52,9 @@ public class webTest {
 
     @Autowired
     private HobbyDao hobbyDao;
+
+    @Autowired
+    private UserService userService;
 
 
     @Test
@@ -84,9 +90,9 @@ public class webTest {
 
     @Test
     //加下面这个会解决：could not initialize proxy - no Session
-    @Transactional
+    @Rollback(value = false)
     public void manyToManyTest() {
-//        User userData = repository.findOne(3L);
+        User userData = userService.findOne(1L);
 //        List<Hobby> hobbies=new ArrayList<Hobby>();
 //        Hobby hobby1=new Hobby();
 //        Hobby hobby2=hobbyDao.findOne(2L);
@@ -96,16 +102,17 @@ public class webTest {
 //        hobbies.add(hobby2);
 //        hobbies.add(hobby3);
 //        userData.setHobbyList(hobbies);
-//        User userUpdate=repository.save(userData);
-//        assertThat(userData.getName()).isEqualTo("dingtian");
-        List<Hobby> hobbies=hobbyDao.findAll();
-        for(Hobby hobby:hobbies) {
-            List<User> users =hobby.getUsers();
-            System.out.println(hobby.getName() + " :");
-            for (User user : users) {
-                System.out.println(" " + user.getName());
-            }
-        }
+        userData.setName("yingting");
+        User userUpdate=userService.save(userData);
+        assertThat(userData.getName()).isEqualTo("yingting");
+//        List<Hobby> hobbies=hobbyDao.findAll();
+//        for(Hobby hobby:hobbies) {
+//            List<User> users =hobby.getUsers();
+//            System.out.println(hobby.getName() + " :");
+//            for (User user : users) {
+//                System.out.println(" " + user.getName());
+//            }
+//        }
 
     }
 
