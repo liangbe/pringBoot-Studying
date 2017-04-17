@@ -102,8 +102,8 @@ public class webTest {
 //        hobbies.add(hobby2);
 //        hobbies.add(hobby3);
 //        userData.setHobbyList(hobbies);
-        userData.setName("yingting");
-        User userUpdate=userService.save(userData);
+//        userData.setName("yingting");
+//        User userUpdate=userService.save(userData);
         assertThat(userData.getName()).isEqualTo("yingting");
 //        List<Hobby> hobbies=hobbyDao.findAll();
 //        for(Hobby hobby:hobbies) {

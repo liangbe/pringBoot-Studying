@@ -22,9 +22,8 @@ public class PointCutClass {
     }
 
     @Before(value = "excudeService()")
-    @Transactional
     public void doBefore() {
-        System.out.println("2333");
+
     }
 
 }
