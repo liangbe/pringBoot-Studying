@@ -9,8 +9,4 @@ import java.util.List;
  */
 
 public interface UserService extends CRUDService<User,Long>{
-//
-//    User save(User user);
-//
-//    User findOne(Long id);
 }

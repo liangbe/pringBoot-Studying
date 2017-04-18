@@ -1,6 +1,9 @@
 package com.bee.study.service;
 
+import com.bee.study.util.SearchDto;
+import org.hibernate.Filter;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.List;
 public interface CRUDService <T,ID extends Serializable>{
 
     List<T> findAll();
+
+    List<T> findAll(List<SearchDto> searchDtoList);
 
     <S extends T> S save(S entity);
 

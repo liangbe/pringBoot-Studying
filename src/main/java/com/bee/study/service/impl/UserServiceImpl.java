@@ -17,7 +17,7 @@ public class UserServiceImpl extends CRUDServiceImpl<User,Long> implements UserS
     UserDao userDao;
 
     @Override
-    public JpaRepository getDao() {
+    public UserDao getDao() {
         return userDao;
     }
 }

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by liangbe on 2017/4/13.
  */
 @Repository
-public interface HobbyDao extends JpaRepository<Hobby,Long>{
+public interface HobbyDao extends BaseDao<Hobby,Long>{
 }

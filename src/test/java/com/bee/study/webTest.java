@@ -9,6 +9,7 @@ import com.bee.study.entity.Education;
 import com.bee.study.entity.Hobby;
 import com.bee.study.entity.User;
 import com.bee.study.service.UserService;
+import com.bee.study.util.SearchDto;
 import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,7 +93,18 @@ public class webTest {
     //加下面这个会解决：could not initialize proxy - no Session
     @Rollback(value = false)
     public void manyToManyTest() {
-        User userData = userService.findOne(1L);
+//        User userData = userService.findOne(1L);
+        SearchDto searchDto=new SearchDto("firstName","LIKE","yan");
+        SearchDto searchDto2=new SearchDto("age","GT",20);
+        List<SearchDto> searchDtoList=new ArrayList<SearchDto>();
+        searchDtoList.add(searchDto);
+        searchDtoList.add(searchDto2);
+        List<User> users = userService.findAll(searchDtoList);
+        int num=0;
+        for(User u:users){
+            num++;
+            System.out.println("Result :" +num);
+        }
 //        List<Hobby> hobbies=new ArrayList<Hobby>();
 //        Hobby hobby1=new Hobby();
 //        Hobby hobby2=hobbyDao.findOne(2L);
@@ -102,9 +114,9 @@ public class webTest {
 //        hobbies.add(hobby2);
 //        hobbies.add(hobby3);
 //        userData.setHobbyList(hobbies);
-//        userData.setName("yingting");
+//        userData.setName("yingting23333");
 //        User userUpdate=userService.save(userData);
-        assertThat(userData.getName()).isEqualTo("yingting");
+//        assertThat(userUpdate.getName()).isEqualTo("yingting23333");
 //        List<Hobby> hobbies=hobbyDao.findAll();
 //        for(Hobby hobby:hobbies) {
 //            List<User> users =hobby.getUsers();

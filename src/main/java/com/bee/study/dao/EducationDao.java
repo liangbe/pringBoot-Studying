@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by liangbe on 2017/4/13.
  */
 @Repository
-public interface EducationDao extends JpaRepository<Education,Long>{
+public interface EducationDao extends BaseDao<Education,Long>{
 }
