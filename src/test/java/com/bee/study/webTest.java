@@ -9,7 +9,8 @@ import com.bee.study.entity.Education;
 import com.bee.study.entity.Hobby;
 import com.bee.study.entity.User;
 import com.bee.study.service.UserService;
-import com.bee.study.util.SearchDto;
+import com.bee.study.util.BaseSearch;
+import com.bee.study.util.SearchFilters;
 import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,17 +95,7 @@ public class webTest {
     @Rollback(value = false)
     public void manyToManyTest() {
 //        User userData = userService.findOne(1L);
-        SearchDto searchDto=new SearchDto("firstName","LIKE","yan");
-        SearchDto searchDto2=new SearchDto("age","GT",20);
-        List<SearchDto> searchDtoList=new ArrayList<SearchDto>();
-        searchDtoList.add(searchDto);
-        searchDtoList.add(searchDto2);
-        List<User> users = userService.findAll(searchDtoList);
-        int num=0;
-        for(User u:users){
-            num++;
-            System.out.println("Result :" +num);
-        }
+
 //        List<Hobby> hobbies=new ArrayList<Hobby>();
 //        Hobby hobby1=new Hobby();
 //        Hobby hobby2=hobbyDao.findOne(2L);
@@ -126,6 +117,24 @@ public class webTest {
 //            }
 //        }
 
+    }
+    @Test
+    public void testSearch(){
+        // TODO
+        SearchFilters searchDto=new SearchFilters("firstName","LIKE","yan");
+        SearchFilters searchDto2=new SearchFilters("age","GT",20);
+        List<SearchFilters> searchDtoList=new ArrayList<SearchFilters>();
+//        searchDtoList.add(searchDto);
+//        searchDtoList.add(searchDto2);
+        BaseSearch<User> baseSearch=new BaseSearch(searchDtoList);
+        // TODO
+
+        List<User> users = userService.findAll(baseSearch);
+        int num=0;
+        for(User u:users){
+            num++;
+            System.out.println("Result :" +u.getName() +"    ========"+num);
+        }
     }
 
 }

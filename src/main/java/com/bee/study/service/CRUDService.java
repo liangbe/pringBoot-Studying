@@ -1,9 +1,9 @@
 package com.bee.study.service;
 
-import com.bee.study.util.SearchDto;
-import org.hibernate.Filter;
+import com.bee.study.util.BaseSearch;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +15,11 @@ public interface CRUDService <T,ID extends Serializable>{
 
     List<T> findAll();
 
-    List<T> findAll(List<SearchDto> searchDtoList);
+    List<T> findAll(BaseSearch<T> baseSearch);
+
+    Page<T> findAll(BaseSearch<T> baseSearch, Pageable pageable);
+
+    List<T> findAll(BaseSearch<T> baseSearch, Sort sort);
 
     <S extends T> S save(S entity);
 

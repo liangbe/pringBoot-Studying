@@ -1,5 +1,7 @@
 package com.bee.study.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 /**

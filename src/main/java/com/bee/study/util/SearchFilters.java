@@ -3,14 +3,14 @@ package com.bee.study.util;
 /**
  * Created by liangbe on 2017/4/17.
  */
-public class SearchDto {
+public class SearchFilters {
     /** 拼接类型，and或者or */
 //    private String type;
     private String key;
     private String operation;
     private Object value;
 
-    public SearchDto(String key, String operation, Object value) {
+    public SearchFilters(String key, String operation, Object value) {
 
         this.key = key;
         this.operation = operation;

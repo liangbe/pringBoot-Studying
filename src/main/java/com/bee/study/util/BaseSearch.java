@@ -26,9 +26,9 @@ enum Operator {
     ISNULL
 }
 public class BaseSearch<T> implements Specification<T> {
-    private List<SearchDto> criteriaList;
+    private List<SearchFilters> criteriaList;
 
-    public BaseSearch(List<SearchDto>  criteriaList) {
+    public BaseSearch(List<SearchFilters>  criteriaList) {
 
         this.criteriaList = criteriaList;
     }
@@ -36,7 +36,7 @@ public class BaseSearch<T> implements Specification<T> {
     public Predicate toPredicate
             (Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> list = new ArrayList<Predicate>();
-     for(SearchDto criteria:criteriaList) {
+     for(SearchFilters criteria:criteriaList) {
          String opt = criteria.getOperation();
          String key = criteria.getKey();
          String value = criteria.getValue().toString();

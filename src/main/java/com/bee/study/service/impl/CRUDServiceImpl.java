@@ -4,10 +4,10 @@ package com.bee.study.service.impl;
 import com.bee.study.dao.BaseDao;
 import com.bee.study.service.CRUDService;
 import com.bee.study.util.BaseSearch;
-import com.bee.study.util.SearchDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -26,6 +26,21 @@ public abstract class CRUDServiceImpl<T,ID extends Serializable> implements CRUD
     @Override
     public List<T> findAll() {
         return getDao().findAll();
+    }
+
+    @Override
+    public List<T> findAll(BaseSearch<T> baseSearch) {
+        return getDao().findAll(baseSearch);
+    }
+
+    @Override
+    public Page<T> findAll(BaseSearch<T> baseSearch, Pageable pageable) {
+        return getDao().findAll(baseSearch,pageable);
+    }
+
+    @Override
+    public List<T> findAll(BaseSearch<T> baseSearch, Sort sort) {
+        return getDao().findAll(baseSearch,sort);
     }
 
     @Override
@@ -59,12 +74,5 @@ public abstract class CRUDServiceImpl<T,ID extends Serializable> implements CRUD
         getDao().flush();
     }
 
-    @Override
-    public List<T> findAll(List<SearchDto> searchDtoList) {
 
-//        SearchDto searchDto=new SearchDto("userName","eq", "user1");
-
-        BaseSearch<T> baseSearch =new BaseSearch<T>(searchDtoList);
-        return getDao().findAll(baseSearch);
-    }
 }
