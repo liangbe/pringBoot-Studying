@@ -1,3 +1,5 @@
 /.idea/*
 *.iml
 /src/main/resources/static/*
+/src/webapp/css/*
+/src/webapp/js/*
