@@ -4,8 +4,104 @@
   <title>Started</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+<script type="text/javascript" th:src="@{/js/ext-all.js}"></script>
+<link rel="stylesheet" th:href="@{/css/ext-all.css}" />
+<script>
+    Ext.onReady(function(){
+
+        Ext.define('User', {
+            extend: 'Ext.data.Model',
+            fields: [
+                { name: 'id' ,type: 'int'},
+                { name: 'age', type: 'int' },
+                { name: 'name', type: 'string' },
+                { name: 'firstName',  type: 'string' },
+                { name: 'address',type: 'auto' },
+                { name: 'educationList',type: 'auto' },
+                { name: 'hobbyList',type: 'auto' }
+
+            ],
+        });
+        var store = new Ext.data.JsonStore({
+            // store configs
+            storeId: 'myStore',
+            autoLoad:true,
+            pageSize:1,
+            model:'User',
+            proxy: {
+                type: 'ajax',
+                url: "[[@{./api/user}]]",
+                reader: {
+                    type: 'json',
+                    totalProperty: 'totalElements',
+                    root: 'content'
+                },
+                extraParams:{
+                    searchFilters:"[{'key':'firstName','operation':'EQ','value':'Yan'},{'key':'name','operation':'EQ','value':'yingyi'}]"
+                }
+            }
+            //alternatively, a Model name can be given (see Ext.data.Store for an example)
+        });
+        Ext.create('Ext.grid.Panel', {
+            title: 'Simpsons',
+            store: store,
+            id:'myGridPanel',
+            columns: [
+                {
+                    text: 'Id',
+                    dataIndex: 'id',
+                    flex:1,
+                },
+                {
+                    text: 'Age',
+                    dataIndex: 'age',
+                    flex:1,
+                },
+                {
+                    text: 'Name',
+                    dataIndex: 'name',
+                    flex:1,
+                },
+                {
+                    text: 'First Name',
+                    dataIndex: 'firstName',
+                    flex:1,
+                },
+            ],
+            height: 500,
+            width: 1000,
+            bbar: {
+                xtype: 'pagingtoolbar',
+                pageSize: 1,
+                store: store,
+                displayInfo: true,
+            },
+            dockedItems : [
+                {
+                    xtype : 'toolbar',
+                    dock : 'top',
+                    items : [
+                        {
+                            xtype : 'button',
+                            id : 'addBtn',
+                            text : 'Add'
+                        },
+                    ],
+                },
+
+            ],
+            renderTo: Ext.getBody()
+        });
+        Ext.getCmp("addBtn").on("click",function(btn){
+            store.insert ( 0 ,  Ext.create('TypeSupp', {}) );
+            Ext.getCmp("myGridPanel").getPlugin ( 'myplugin').startEdit(0,0);
+        });
+        Ext.getCmp("myGridPanel").on("edit",function( editor , context ){
+            var record= context.record;
+        });
+    });
+</script>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
+
 </body>
 </html>
-

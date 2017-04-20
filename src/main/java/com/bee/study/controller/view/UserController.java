@@ -17,9 +17,8 @@ public class UserController {
     @Autowired
     private  UserService userService;
 
-    @RequestMapping(value = "/hello")
-    public String  hello(Model model) {
-        model.addAttribute("name", userService.findOne(1L).getName());
+    @RequestMapping(value = "/User")
+    public String  hello() {
         return  "index";
     }
 }

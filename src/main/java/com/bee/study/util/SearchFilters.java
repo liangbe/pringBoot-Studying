@@ -10,6 +10,10 @@ public class SearchFilters {
     private String operation;
     private Object value;
 
+    public SearchFilters(){
+
+    }
+
     public SearchFilters(String key, String operation, Object value) {
 
         this.key = key;
